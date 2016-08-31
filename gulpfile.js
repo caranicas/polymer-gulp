@@ -80,3 +80,20 @@ gulp.task('default', gulp.series([
   project.merge(source, dependencies),
   project.serviceWorker
 ]));
+
+
+const babel = require('gulp-babel');
+const rename = require("gulp-rename");
+
+gulp.task('transpile', () =>
+  gulp.src('src/**/index.js',{base: './'})
+  .pipe(babel({
+    presets: ['es2015']
+  }))
+  .pipe(rename({
+    basename: "built",
+    extname: ".js"
+  }))
+  //.pipe(rename("built.js"))
+  .pipe(gulp.dest('./'))
+);
